@@ -1,6 +1,9 @@
-import { StackRoute } from "./Stack";
+import { useAuthentication } from '../hooks/useAuthentication';
+import {AppStack} from './stacks/App';
+import { AuthenticationStack } from './stacks/Authentication';
 
 export function AppRoutes(){
+  const { user } = useAuthentication();
 
-  return (<StackRoute />);
+  return ( user ? <AppStack/> : <AuthenticationStack/> );
 }

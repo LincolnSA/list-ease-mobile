@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   View,
   Text,
@@ -15,7 +15,7 @@ import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
 import Toast from "react-native-toast-message";
 import { Ionicons } from '@expo/vector-icons';
-import { AuthContext } from "../contexts/Authentication";
+import { useAuthentication } from "../hooks/useAuthentication";
 import colors from "tailwindcss/colors";
 import BackgroundImage from '../assets/backgorund.png';
 import { handleErrorTextFormatting } from "../utils/handleErrorTextFormatting";
@@ -35,7 +35,7 @@ type schemaType = z.infer<typeof schema>;
 
 export function SignIn(){
   const navigation = useNavigation();
-  const { handleSignIn } = useContext(AuthContext);
+  const { handleSignIn } = useAuthentication();
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ showPassword, setShowPassword ] = useState<boolean>(true);
   const { 

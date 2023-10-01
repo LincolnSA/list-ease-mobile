@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { 
   Text,
   View,
@@ -16,7 +16,7 @@ import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import SelectDropdown from 'react-native-select-dropdown';
 import { api } from "../services/api";
 import { socket } from "../services/socket";
-import { AuthContext } from "../contexts/Authentication";
+import { useAuthentication } from "../hooks/useAuthentication";
 import { Loading } from "../components/Loading";
 import colors from "tailwindcss/colors";
 import BackgroundImage from '../assets/backgorund.png';
@@ -38,7 +38,7 @@ const units: Array<ItemDto["amount_type"]> = ["und", "l", "kg"];
 const categories: Array<ItemDto["category"]> = ["Padaria", "Legume", "Carne", "Fruta", "Bebida"];
 
 export function Dashboard(){
-  const { user, handleLogout } = useContext(AuthContext);
+  const { user, handleLogout } = useAuthentication();
   const [ items, setItems] = useState<ItemDto[]>([]);
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const { 

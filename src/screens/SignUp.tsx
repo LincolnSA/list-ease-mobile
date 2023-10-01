@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { 
   View, 
   Text,
@@ -18,7 +18,7 @@ import Toast from "react-native-toast-message";
 import colors from "tailwindcss/colors";
 import BackgroundImage from '../assets/backgorund.png';
 import { api } from "../services/api";
-import { AuthContext } from "../contexts/Authentication";
+import { useAuthentication } from "../hooks/useAuthentication";
 import { handleErrorTextFormatting } from "../utils/handleErrorTextFormatting";
 
 const schema = z.object({
@@ -39,7 +39,7 @@ type schemaType = z.infer<typeof schema>;
 
 export function SignUp(){
   const navigation = useNavigation();
-  const { handleSignIn } = useContext(AuthContext);
+  const { handleSignIn } = useAuthentication();
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ showPassword, setShowPassword ] = useState<boolean>(true);
   const { 
